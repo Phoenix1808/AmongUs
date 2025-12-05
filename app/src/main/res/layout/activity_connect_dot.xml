@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConnectDotActivity"
+    android:background="#A8E6CF">
+
+    <FrameLayout
+        android:id="@+id/gridContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar" />
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="@android:color/transparent">
+
+    <Button
+        android:id="@+id/btnRestart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restart"
+        android:textAllCaps="false"
+        android:backgroundTint="#1F1F23"
+        android:textColor="#FFFFFF"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"/>
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:textColor="#0F0E0E"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:text="Connect all colors!"
+        android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

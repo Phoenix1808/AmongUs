@@ -5,13 +5,8 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.setPadding
 import android.os.Looper
 import android.widget.TextView
-
-import androidx.core.os.postDelayed
 import android.os.Handler
 import androidx.core.content.ContextCompat
 
