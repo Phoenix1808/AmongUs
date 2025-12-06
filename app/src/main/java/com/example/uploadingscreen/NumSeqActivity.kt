@@ -53,6 +53,7 @@ class NumSeqActivity : AppCompatActivity() {
         }
     }
 
+    //this function is used to convert dp to px for consistent tile margins
     private fun dpToPx(dp: Int): Int =
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -63,8 +64,8 @@ class NumSeqActivity : AppCompatActivity() {
 
     private fun generateGrid() {
 
-        gridLayout.post {
-            if (gridCreated) return@post
+        gridLayout.post { //post is used here kyunki gridLayout ki width onCreate() par nhi pata hoti h so post{} runs the code after UI is mesured and laid out.
+            if (gridCreated) return@post // grid is built only once
             gridCreated = true
 
             gridLayout.removeAllViews()
@@ -74,7 +75,7 @@ class NumSeqActivity : AppCompatActivity() {
             val margin = dpToPx(6)
             val size = (totalWidth - margin * 6) / 3
 
-            for (i in 0 until 9) {
+            for (i in 0 until 9) {  //this loop creates 9 tiles
 
                 val tv = TextView(this).apply {
                     layoutParams = GridLayout.LayoutParams().apply {
@@ -83,7 +84,7 @@ class NumSeqActivity : AppCompatActivity() {
                         setMargins(margin, margin, margin, margin)
                     }
 
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.CENTER //create align numbers
                     textSize = 26f
                     setTextColor(Color.parseColor("#0B0B0B"))
                     background = ContextCompat.getDrawable(
@@ -100,7 +101,7 @@ class NumSeqActivity : AppCompatActivity() {
                 }
 
                 cells.add(tv)
-                gridLayout.addView(tv)
+                gridLayout.addView(tv) // this adds up the tile to UI
             }
 
 
@@ -111,7 +112,7 @@ class NumSeqActivity : AppCompatActivity() {
     private fun startNewRound() {
         handler.removeCallbacksAndMessages(null)
 
-        positionToNumber.clear()
+        positionToNumber.clear() //removes all the old mappings
         nextExpected = 1
         roundActive = false
         roundFailed = false
