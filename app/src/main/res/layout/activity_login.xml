@@ -22,7 +22,7 @@
         android:id="@+id/imgAstronaut"
         android:layout_width="126dp"
         android:layout_height="156dp"
-        android:src="@drawable/LoginMan"
+        android:src="@drawable/loginman"
         android:scaleType="fitCenter"
         android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toTopOf="@id/etZealId"

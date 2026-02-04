@@ -19,7 +19,7 @@ class AvatarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_avatar)
 
         val rotationContainer = findViewById<View>(R.id.avatarContainer)
-        val btnContinue = findViewById<Button>(R.id.btnContinue)
+        val btnContinue = findViewById<ImageView>(R.id.btnconfirm)
 
         ObjectAnimator.ofFloat(rotationContainer, View.ROTATION, 0f, 360f).apply {
             duration = 12000

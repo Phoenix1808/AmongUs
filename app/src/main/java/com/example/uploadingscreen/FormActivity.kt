@@ -2,6 +2,7 @@ package com.example.uploadingscreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,7 @@ class FormActivity : AppCompatActivity() {
         val branch = findViewById<EditText>(R.id.etBranch)
         val year = findViewById<EditText>(R.id.etYear)
         val group = findViewById<EditText>(R.id.etGroup)
-        val btncontinue = findViewById<Button>(R.id.btnContinue)
+        val btncontinue = findViewById<ImageView>(R.id.btnconfirm)
 
         btncontinue.setOnClickListener {
             val branch = branch.text.toString().trim()
