@@ -27,7 +27,7 @@ class AuthViewModel: ViewModel() {
                     _loginRes.value = resp.body()
                 }
             } catch(e:Exception){
-                e.printStackTrace()
+                e.printStackTrace() //this is used to print all the errors in logcat
             }
         }
     }
