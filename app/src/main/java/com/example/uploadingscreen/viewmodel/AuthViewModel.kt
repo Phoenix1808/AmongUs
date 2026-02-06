@@ -12,16 +12,15 @@ import com.example.uploadingscreen.repository.AuthRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AuthViewModel: ViewModel() {
+class AuthViewModel : ViewModel() {
+
     private val repo = AuthRepository()
 
-    //livedata login
+    // livedata login ka
     private val _loginRes = MutableLiveData<LoginResponse>()
-    val loginRes : LiveData<LoginResponse> = _loginRes
-
-    fun login(request: LoginRequest){
+    val loginRes: LiveData<LoginResponse> = _loginRes
+    fun login(request: LoginRequest) {
         val mock = false
-
         viewModelScope.launch {
             if (mock) {
                 delay(3000)
@@ -38,21 +37,14 @@ class AuthViewModel: ViewModel() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-<<<<<<< HEAD
-=======
-            } catch(e:Exception){
-                e.printStackTrace() //this is used to print all the errors in logcat
->>>>>>> 0df75107c0c478e4d8b95f6d1022579dfa18100a
             }
         }
     }
 
-    //livedata register
+    // livedata register ka
     private val _signUpRes = MutableLiveData<SignUpResponse>()
-    val signUpRes : LiveData<SignUpResponse> = _signUpRes
-
+    val signUpRes: LiveData<SignUpResponse> = _signUpRes
     fun register(request: SignUpRequest) {
-
         val mock = false
         viewModelScope.launch {
             if (mock) {
@@ -64,7 +56,6 @@ class AuthViewModel: ViewModel() {
             } else {
                 try {
                     val resp = repo.register(request)
-
                     if (resp.isSuccessful) {
                         _signUpRes.value = resp.body()
                     }
