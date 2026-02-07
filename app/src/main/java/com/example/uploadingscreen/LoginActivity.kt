@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
             viewModel.loginRes.observe(this){response ->
-                if(response.success){
+                if(response.message=="Login Successful"){
                     Toast.makeText(this,"Login Success",Toast.LENGTH_SHORT).show()
 
                     val prefs = getSharedPreferences("users_prefs", MODE_PRIVATE)

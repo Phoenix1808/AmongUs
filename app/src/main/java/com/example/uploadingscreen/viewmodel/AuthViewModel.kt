@@ -23,10 +23,10 @@ class AuthViewModel : ViewModel() {
         val mock = false
         viewModelScope.launch {
             if (mock) {
-                delay(3000)
+                delay(2000)
                 _loginRes.value = LoginResponse(
-                    success = true,
-                    message = "Mock Login Successful"
+                    message = "Login Successful",
+                    user = null
                 )
             } else {
                 try {
@@ -48,10 +48,11 @@ class AuthViewModel : ViewModel() {
         val mock = false
         viewModelScope.launch {
             if (mock) {
-                delay(5000)
+                delay(2000)
                 _signUpRes.value = SignUpResponse(
-                    success = true,
-                    message = "Mock Signup Success"
+
+                    message = "User Created",
+                    user = null
                 )
             } else {
                 try {
@@ -60,7 +61,8 @@ class AuthViewModel : ViewModel() {
                         _signUpRes.value = resp.body()
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    e.printStackTrace() //used for printing all the error logs
+
                 }
             }
         }

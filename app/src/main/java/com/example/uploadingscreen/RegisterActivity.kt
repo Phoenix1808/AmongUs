@@ -1,9 +1,7 @@
 package com.example.uploadingscreen
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import android.content.Intent
 import android.widget.EditText
 import android.widget.ImageView
@@ -22,32 +20,33 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
-        val username = findViewById<EditText>(R.id.etUserName)
-        val zealId = findViewById<EditText>(R.id.etZealID)
-        val password = findViewById<EditText>(R.id.etPassword)
+        val usernameEt = findViewById<EditText>(R.id.etUserName)
+        val emailEt = findViewById<EditText>(R.id.etEmail)
+        val passwordEt = findViewById<EditText>(R.id.etPassword)
         val btnconfirm = findViewById<ImageView>(R.id.btnconfirm)
 
         btnconfirm.setOnClickListener {
-            val username = username.text.toString().trim()
-            val zealId = zealId.text.toString().trim()
-            val password = password.text.toString().trim()
+            val username = usernameEt.text.toString().trim()
+            val email = emailEt.text.toString().trim()
+            val password = passwordEt.text.toString().trim()
 
-            if (username.isEmpty() || zealId.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "All Fields Required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val req = SignUpRequest(username, zealId, password)
+
+            val req = SignUpRequest(username, email, password)
             viewModel.register(req)
         }
 
+
         viewModel.signUpRes.observe(this) { response ->
-            if (response.success) {
+            if (response.message == "User created") {
                 Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, FormActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "SignUp Failed", Toast.LENGTH_SHORT).show()
-
             }
         }
     }

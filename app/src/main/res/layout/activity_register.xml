@@ -76,8 +76,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/labelZeal"
-        android:text="Zeal ID"
+        android:id="@+id/labelEmail"
+        android:text="Email"
         android:textSize="12sp"
         android:textColor="#E4E2D4"
         app:layout_constraintTop_toBottomOf="@id/etUserName"
@@ -87,15 +87,16 @@
     <EditText
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:id="@+id/etZealID"
+        android:id="@+id/etEmail"
         android:paddingHorizontal="14dp"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:background="@drawable/et_bg"
-        app:layout_constraintTop_toBottomOf="@id/labelZeal"
+        app:layout_constraintTop_toBottomOf="@id/labelEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="6dp"
+        android:inputType="textEmailAddress"
         android:layout_marginHorizontal="32dp"
         />
 
@@ -109,7 +110,7 @@
         android:textColor="#E4E2D4"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelZeal" />
+        app:layout_constraintTop_toBottomOf="@+id/labelEmail" />
 
     <EditText
         android:layout_width="0dp"
