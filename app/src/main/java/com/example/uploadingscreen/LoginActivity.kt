@@ -2,6 +2,7 @@ package com.example.uploadingscreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.uploadingscreen.model.LoginRequest
 import com.example.uploadingscreen.viewmodel.AuthViewModel
+import android.widget.FrameLayout
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,6 +26,12 @@ class LoginActivity : AppCompatActivity() {
         val etusername = findViewById<EditText>(R.id.etUsername)
         val etPass = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<ImageView>(R.id.btnconfirm)
+        val loader = findViewById<FrameLayout>(R.id.loaderLogin)
+
+        viewModel.loading.observe(this){loading->
+            loader.visibility = if(loading) View.VISIBLE else View.GONE
+            btnLogin.isEnabled = !loading
+        }
 
         btnLogin.setOnClickListener {
 

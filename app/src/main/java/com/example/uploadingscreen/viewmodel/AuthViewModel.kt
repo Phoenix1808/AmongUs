@@ -19,53 +19,71 @@ class AuthViewModel : ViewModel() {
     // livedata login ka
     private val _loginRes = MutableLiveData<LoginResponse>()
     val loginRes: LiveData<LoginResponse> = _loginRes
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
     fun login(request: LoginRequest) {
-        val mock = false
+//        val mock = false
+        _loading.value = true
         viewModelScope.launch {
-            if (mock) {
-                delay(2000)
-                _loginRes.value = LoginResponse(
-                    accessToken = "mocktoken_123",
-                    user = null, //if in case it returns null model mai "User?" is used
-                    message = "Login Success"
-                )
-            } else {
+
                 try {
+
                     val resp = repo.login(request)
-                    if (resp.isSuccessful) {
+
+                    if (resp.isSuccessful && resp.body()!=null) {
                         _loginRes.value = resp.body()
+                    } else {
+                        _loginRes.value = LoginResponse(
+                            accessToken = null,
+                            user = null,
+                            message = "Invalid Credentials"
+                        )
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    _loginRes.value = LoginResponse(
+                        accessToken = null,
+                        user = null,
+                        message = "Network Error: ${e.message}"
+                    )
+                } finally { //used to make sure if API fails loader stops
+                    _loading.value = false
                 }
             }
-        }
     }
 
     // livedata register ka
     private val _signUpRes = MutableLiveData<SignUpResponse>()
     val signUpRes: LiveData<SignUpResponse> = _signUpRes
+
+    private val _signLoad = MutableLiveData<Boolean>()
+    val signLoad : LiveData<Boolean> = _signLoad
+
     fun register(request: SignUpRequest) {
+        _signLoad.value = true
         val mock = false
         viewModelScope.launch {
-            if (mock) {
-                delay(2000)
-                _signUpRes.value = SignUpResponse(
 
-                    message = "User Created",
-                    user = null
-                )
-            } else {
                 try {
                     val resp = repo.register(request)
                     if (resp.isSuccessful) {
                         _signUpRes.value = resp.body()
+                    } else {
+                        _signUpRes.value = SignUpResponse(
+                            message = "Registration Failed",
+                            user = null
+                        )
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace() //used for printing all the error logs
-
+                    _signUpRes.value = SignUpResponse(
+                        message = "Network Error: ${e.message}",
+                        user = null
+                    ) //used for printing all the error logs
+                }
+                finally {
+                    _signLoad.value = false
                 }
             }
         }
     }
-}
+
