@@ -35,6 +35,9 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.isEnabled = !loading
         }
 
+
+        //toggle option in the login screen 
+    
         var isVisible = false
         toggle.setOnClickListener {
             if(isVisible){

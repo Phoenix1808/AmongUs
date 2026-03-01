@@ -14,8 +14,12 @@ import kotlinx.coroutines.launch
 class AuthViewModel : ViewModel() {
 
     private val repo = AuthRepository()
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 7a27b54323f2a39e13d1ceaee931f7b5a37a22bd
     private val _loginRes = MutableLiveData<LoginResponse>()
     val loginRes: LiveData<LoginResponse> = _loginRes
 
@@ -45,13 +49,20 @@ class AuthViewModel : ViewModel() {
                         user = null,
                         message = "Network Error: ${e.message}"
                     )
+<<<<<<< HEAD
                 } finally {
+=======
+                } finally { 
+>>>>>>> 7a27b54323f2a39e13d1ceaee931f7b5a37a22bd
                     _loading.value = false
                 }
             }
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 7a27b54323f2a39e13d1ceaee931f7b5a37a22bd
     private val _signUpRes = MutableLiveData<SignUpResponse>()
     val signUpRes: LiveData<SignUpResponse> = _signUpRes
 
@@ -77,7 +88,11 @@ class AuthViewModel : ViewModel() {
                     _signUpRes.value = SignUpResponse(
                         message = "Network Error: ${e.message}",
                         user = null
+<<<<<<< HEAD
                     )
+=======
+                    ) 
+>>>>>>> 7a27b54323f2a39e13d1ceaee931f7b5a37a22bd
                 }
                 finally {
                     _signLoad.value = false
