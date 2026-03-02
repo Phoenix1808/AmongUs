@@ -5,7 +5,7 @@ import com.example.uploadingscreen.model.AvailableRoomResponse
 import com.example.uploadingscreen.model.CreateRoomResponse
 import com.example.uploadingscreen.model.LoginRequest
 import com.example.uploadingscreen.model.LoginResponse
-import com.example.uploadingscreen.model.RoomLookUpResponse
+import com.example.uploadingscreen.model.RoomLookupResponse
 import com.example.uploadingscreen.model.SetupRequest
 import com.example.uploadingscreen.model.SetupResponse
 import com.example.uploadingscreen.model.SignUpRequest
@@ -51,5 +51,5 @@ interface ApiService {
     suspend fun lookUpRoom(
         @Header("Authorization") token : String,
         @Path("code") code: String
-    ):Response<RoomLookUpResponse>
+    ):Response<RoomLookupResponse>
 }
