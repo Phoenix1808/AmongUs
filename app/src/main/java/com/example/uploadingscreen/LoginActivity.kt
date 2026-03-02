@@ -102,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
                         .putString("token", response?.accessToken)
                         .apply()
 
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, LobbyActivity::class.java))
                     finish()
                 }
 

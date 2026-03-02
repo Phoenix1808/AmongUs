@@ -1,4 +1,4 @@
-package com.example.uploadingscreen.model
-
-class SetupResponse {
-}
+//package com.example.uploadingscreen.model
+//
+//class SetupResponse {
+//}

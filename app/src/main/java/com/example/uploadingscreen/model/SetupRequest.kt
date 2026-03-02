@@ -1,4 +1,4 @@
-package com.example.uploadingscreen.model
-
-data class SetupRequest(
-)
+//package com.example.uploadingscreen.model
+//
+//data class SetupRequest(
+//)
