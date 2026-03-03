@@ -135,7 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Hostel/Group"
+        android:text="ZealID"
         android:textSize="12sp"
         android:textColor="#E4E2D4"
         app:layout_constraintTop_toBottomOf="@id/etYear"
@@ -144,20 +144,22 @@
         android:layout_marginStart="32dp"
         />
 
-    <EditText
-        android:id="@+id/etGroup"
+    <AutoCompleteTextView
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:hint="Hostel / Group"
+        android:id="@+id/etGroup"
         android:background="@drawable/et_bg"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="14dp"
         android:textColor="@android:color/black"
+        android:focusable="false"
+        android:textSize="14sp"
+        android:hint="Zeal-ID"
+        android:clickable="true"
         app:layout_constraintTop_toBottomOf="@id/labelgroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="6dp"
         android:layout_marginHorizontal="32dp"/>
-
     <ImageView
         android:id="@+id/btnconfirm"
         android:layout_width="0dp"
