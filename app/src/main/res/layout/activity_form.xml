@@ -144,22 +144,20 @@
         android:layout_marginStart="32dp"
         />
 
-    <AutoCompleteTextView
+    <EditText
+        android:id="@+id/etGroup"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:id="@+id/etGroup"
-        android:background="@drawable/et_bg"
-        android:paddingHorizontal="14dp"
-        android:textColor="@android:color/black"
-        android:focusable="false"
-        android:textSize="14sp"
         android:hint="Zeal-ID"
-        android:clickable="true"
+        android:background="@drawable/et_bg"
+        android:paddingHorizontal="16dp"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@id/labelgroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="6dp"
         android:layout_marginHorizontal="32dp"/>
+
     <ImageView
         android:id="@+id/btnconfirm"
         android:layout_width="0dp"
