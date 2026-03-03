@@ -68,7 +68,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation("com.google.android.material:material:1.11.0")
     implementation(libs.androidx.room.ktx)
-
+    implementation("io.socket:socket.io-client:2.1.0") {
+        exclude(group = "org.json", module = "json")
+    }
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
