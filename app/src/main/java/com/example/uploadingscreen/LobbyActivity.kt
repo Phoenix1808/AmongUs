@@ -37,7 +37,7 @@ class LobbyActivity : AppCompatActivity() {
             return
         }
 
-        // 🔌 Initialize & connect socket
+        //  Initialize & connect socket
         SocketManager.init(authToken!!)
         SocketManager.connect()
 
@@ -137,7 +137,7 @@ class LobbyActivity : AppCompatActivity() {
         }
     }
 
-    // 🔥 Wait until socket connected before joining
+    //  wait until socket connected before joining
     private fun waitAndJoinRoom(roomCode: String) {
 
         val socket = SocketManager.getSocket() ?: return
@@ -233,7 +233,7 @@ class LobbyActivity : AppCompatActivity() {
 
         socket.on("game:started") {
             runOnUiThread {
-                toast("Game Started 🎮")
+                toast("Game Started ")
             }
         }
 
