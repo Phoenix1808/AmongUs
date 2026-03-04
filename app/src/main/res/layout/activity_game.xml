@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity"
+    android:background="@drawable/tile_bg_purple"
     android:padding="24dp">
 
     <TextView
@@ -30,7 +31,6 @@
         app:layout_constraintTop_toBottomOf="@id/tvRoomCode"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="24dp"/>
-
 
     <TextView
         android:layout_width="wrap_content"

@@ -241,14 +241,36 @@ class LobbyActivity : AppCompatActivity() {
             }
         }
 
+        //this .off() prevents the duplicate listeners (Screen Rotation/ Acitivty Recreation)
+        socket.off("game:started")
+
         socket.on("game:started") {
             runOnUiThread {
                 Log.d("SOCKET_DEBUG", "game:started event received")
-                val intent = Intent(this, GameActivity::class.java)
-                intent.putExtra("roomCode",joinedRoomCode)
-                startActivity(intent)
+//                val intent = Intent(this, GameActivity::class.java)
+//                intent.putExtra("roomCode",joinedRoomCode)
+//                startActivity(intent)
             }
         }
+
+        socket.off("game:role")
+        socket.on("game:role"){args->
+            runOnUiThread {
+                if(args.isNotEmpty() && args[0] is JSONObject){
+                    val data = args[0] as JSONObject
+                    val role = data.optString("role")
+                    Log.d("SOCKET_DEBUG","Role Received: $role")
+
+                    val intent = Intent(this, GameActivity::class.java)
+                        intent.putExtra("roomCode",joinedRoomCode)
+                        intent.putExtra("role",role)
+
+                        startActivity(intent)
+
+                }
+            }
+        }
+
 
 
         socket.on("game:error") { args ->
@@ -289,16 +311,7 @@ class LobbyActivity : AppCompatActivity() {
                     val response = args[0] as JSONObject
                     val ok = response.optBoolean("ok", false)
 
-                    if (ok) {
-
-                        Log.d("SOCKET_DEBUG", "Start game acknowledged OK")
-
-
-                        val intent = Intent(this, GameActivity::class.java)
-                        intent.putExtra("roomCode", joinedRoomCode)
-                        startActivity(intent)
-
-                    } else {
+                    if (!ok) {
                         toast(response.optString("message"))
                     }
                 }
