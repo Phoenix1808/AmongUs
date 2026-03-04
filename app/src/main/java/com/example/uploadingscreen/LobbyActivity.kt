@@ -57,7 +57,7 @@ class LobbyActivity : AppCompatActivity() {
         val tvLookupResult = findViewById<TextView>(R.id.tvLookupResult)
         btnStartGame = findViewById<Button>(R.id.btnStartGame)
 
-        btnStartGame.isEnabled= false
+        btnStartGame.isEnabled = false
 
         btnStartGame.setOnClickListener {
             startGame()
@@ -164,7 +164,8 @@ class LobbyActivity : AppCompatActivity() {
             }
         }
     }
-//game initialization k liye
+
+    //game initialization k liye
     private fun joinRoom(roomCode: String) {
 
         val socket = SocketManager.getSocket() ?: return
@@ -229,13 +230,17 @@ class LobbyActivity : AppCompatActivity() {
 
         val socket = SocketManager.getSocket() ?: return
 
-        socket.off()
+//        socket.off("lobby:player-joined")
+//        socket.off("game:started")
+//        socket.off("game:role")
+//        socket.off("game:error")
 
         socket.on("lobby:player-joined") { args ->
-            runOnUiThread {
-                if (args.isNotEmpty() && args[0] is JSONObject) {
-                    val data = args[0] as JSONObject
-                    val userId = data.optString("user")
+
+            if (args.isNotEmpty() && args[0] is JSONObject) {
+                val data = args[0] as JSONObject
+                val userId = data.optString("user")
+                runOnUiThread {
                     toast("Player joined: $userId")
                 }
             }
@@ -254,19 +259,19 @@ class LobbyActivity : AppCompatActivity() {
         }
 
         socket.off("game:role")
-        socket.on("game:role"){args->
-            runOnUiThread {
-                if(args.isNotEmpty() && args[0] is JSONObject){
-                    val data = args[0] as JSONObject
-                    val role = data.optString("role")
-                    Log.d("SOCKET_DEBUG","Role Received: $role")
+        socket.on("game:role") { args ->
 
+            if (args.isNotEmpty() && args[0] is JSONObject) {
+                val data = args[0] as JSONObject
+                val role = data.optString("role")
+                Log.d("SOCKET_DEBUG", "Role Received: $role")
+
+                runOnUiThread {
                     val intent = Intent(this, GameActivity::class.java)
-                        intent.putExtra("roomCode",joinedRoomCode)
-                        intent.putExtra("role",role)
+                    intent.putExtra("roomCode", joinedRoomCode)
+                    intent.putExtra("role", role)
 
-                        startActivity(intent)
-
+                    startActivity(intent)
                 }
             }
         }
@@ -274,10 +279,11 @@ class LobbyActivity : AppCompatActivity() {
 
 
         socket.on("game:error") { args ->
-            runOnUiThread {
-                if (args.isNotEmpty() && args[0] is JSONObject) {
-                    val data = args[0] as JSONObject
-                    val message = data.optString("message")
+
+            if (args.isNotEmpty() && args[0] is JSONObject) {
+                val data = args[0] as JSONObject
+                val message = data.optString("message")
+                runOnUiThread {
                     toast("Game Error: $message")
                 }
             }
@@ -318,6 +324,4 @@ class LobbyActivity : AppCompatActivity() {
             }
         })
     }
-
-
 }

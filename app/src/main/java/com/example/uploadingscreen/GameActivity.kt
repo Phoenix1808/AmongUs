@@ -2,16 +2,11 @@ package com.example.uploadingscreen
 
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.uploadingscreen.network.SocketManager
-import org.json.JSONObject
 
 //removed the socket.on("game:role") bcoz this event was getting fired just after the game:started evvent so it was done in LobbyActivity part
-
+//Now this screen will show the room code with role assigned form the server and then the status of game will be "Game Started"
 class GameActivity : AppCompatActivity() {
 
     private var roomCode: String? = null
@@ -29,9 +24,9 @@ class GameActivity : AppCompatActivity() {
         roomCode = intent.getStringExtra("roomCode")
         role = intent.getStringExtra("role")
 
-        tvRole=findViewById<TextView>(R.id.tvRole)
-        tvRoomCode= findViewById<TextView>(R.id.tvRoomCode)
-        tvStatus = findViewById<TextView>(R.id.tvStatus)
+        tvRole=findViewById(R.id.tvRole)
+        tvRoomCode= findViewById(R.id.tvRoomCode)
+        tvStatus = findViewById(R.id.tvStatus)
 
         tvRoomCode.text = "Room Code : $roomCode"
         tvStatus.text = "Waiting For Role.."
