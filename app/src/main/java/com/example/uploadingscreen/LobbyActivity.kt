@@ -2,12 +2,11 @@ package com.example.uploadingscreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.uploadingscreen.adapter.RoomAdapter
+import com.example.uploadingscreen.databinding.ActivityLobbyBinding
 import com.example.uploadingscreen.model.Player
 import com.example.uploadingscreen.network.SocketManager
 import com.example.uploadingscreen.utils.Resource
@@ -15,13 +14,15 @@ import com.example.uploadingscreen.viewmodel.RoomViewModel
 
 class LobbyActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityLobbyBinding
     private lateinit var viewModel: RoomViewModel
     private var authToken: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lobby)
+
+        binding = ActivityLobbyBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[RoomViewModel::class.java]
 
@@ -36,50 +37,37 @@ class LobbyActivity : AppCompatActivity() {
         SocketManager.init(authToken!!)
         SocketManager.connect()
 
-        val rvRooms = findViewById<RecyclerView>(R.id.rvRooms)
-        val btnCreateRoom = findViewById<Button>(R.id.btnCreateRoom)
-        val btnFetchRoom = findViewById<Button>(R.id.btnFetchRoom)
-        val btnLookupRoom = findViewById<Button>(R.id.btnLookupRoom)
-        val etRoomCode = findViewById<EditText>(R.id.etRoomCode)
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-
-        val adapter = RoomAdapter(emptyList()) { room ->
-            viewModel.lookupRoom(authToken!!, room.code)
-        }
-
-        rvRooms.layoutManager = LinearLayoutManager(this)
-        rvRooms.adapter = adapter
-
-        btnCreateRoom.setOnClickListener {
+        binding.btnCreateRoom.setOnClickListener {
             viewModel.createRoom(authToken!!)
         }
 
-        btnFetchRoom.setOnClickListener {
-            viewModel.getAvailableRooms(authToken!!)
-        }
+        binding.btnLookupRoom.setOnClickListener {
 
-        btnLookupRoom.setOnClickListener {
-
-            val code = etRoomCode.text.toString().trim()
+            val code = binding.etRoomCode.text.toString().trim()
 
             if (code.isEmpty()) {
-                etRoomCode.error = "Enter room code"
+                binding.etRoomCode.error = "Enter room code"
                 return@setOnClickListener
             }
 
             viewModel.lookupRoom(authToken!!, code)
         }
 
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+
         viewModel.createRoom.observe(this) { resource ->
 
             when (resource) {
 
                 is Resource.Loading ->
-                    progressBar.visibility = ProgressBar.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
 
                 is Resource.Success -> {
 
-                    progressBar.visibility = ProgressBar.GONE
+                    binding.progressBar.visibility = View.GONE
 
                     val roomCode = resource.data?.code
 
@@ -89,7 +77,7 @@ class LobbyActivity : AppCompatActivity() {
                 }
 
                 is Resource.Error -> {
-                    progressBar.visibility = ProgressBar.GONE
+                    binding.progressBar.visibility = View.GONE
                     toast(resource.message)
                 }
             }
@@ -100,11 +88,11 @@ class LobbyActivity : AppCompatActivity() {
             when (resource) {
 
                 is Resource.Loading ->
-                    progressBar.visibility = ProgressBar.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
 
                 is Resource.Success -> {
 
-                    progressBar.visibility = ProgressBar.GONE
+                    binding.progressBar.visibility = View.GONE
 
                     val roomCode = resource.data?.code
                     val players = resource.data?.players
@@ -115,7 +103,7 @@ class LobbyActivity : AppCompatActivity() {
                 }
 
                 is Resource.Error -> {
-                    progressBar.visibility = ProgressBar.GONE
+                    binding.progressBar.visibility = View.GONE
                     toast(resource.message)
                 }
             }

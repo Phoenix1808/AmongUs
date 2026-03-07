@@ -2,16 +2,16 @@ package com.example.uploadingscreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.uploadingscreen.adapter.PlayerAdapter
+import com.example.uploadingscreen.databinding.ActivityWaitinRoomBinding
 import com.example.uploadingscreen.network.SocketManager
 import org.json.JSONObject
 
 class WaitinRoomActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityWaitinRoomBinding
 
     private lateinit var adapter: PlayerAdapter
     private val players = mutableListOf<String>()
@@ -22,25 +22,23 @@ class WaitinRoomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_waitin_room)
+
+        binding = ActivityWaitinRoomBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         roomCode = intent.getStringExtra("roomCode")
         isHost = intent.getBooleanExtra("isHost", false)
 
-        val tvRoomCode = findViewById<TextView>(R.id.tvRoomCode)
-        val rvPlayers = findViewById<RecyclerView>(R.id.rvPlayers)
-        val btnStartGame = findViewById<Button>(R.id.btnStartGame)
-
-        tvRoomCode.text = "Room Code: $roomCode"
+        binding.tvRoomCode.text = "Room Code: $roomCode"
 
         adapter = PlayerAdapter(players)
 
-        rvPlayers.layoutManager = LinearLayoutManager(this)
-        rvPlayers.adapter = adapter
+        binding.rvPlayers.layoutManager = LinearLayoutManager(this)
+        binding.rvPlayers.adapter = adapter
 
-        btnStartGame.isEnabled = isHost
+        binding.btnStartGame.isEnabled = isHost
 
-        btnStartGame.setOnClickListener {
+        binding.btnStartGame.setOnClickListener {
 
             val socket = SocketManager.getSocket() ?: return@setOnClickListener
 
@@ -50,7 +48,6 @@ class WaitinRoomActivity : AppCompatActivity() {
 
             socket.emit("game:start", payload)
         }
-
 
         val existingPlayers = intent.getStringArrayExtra("players")
         existingPlayers?.let {
@@ -108,16 +105,13 @@ class WaitinRoomActivity : AppCompatActivity() {
             }
         }
 
-        // Game started event
         socket.on("game:started") {
 
             runOnUiThread {
-
-
+                // optional loading UI
             }
         }
 
-        // role socke
         socket.on("game:role") { args ->
 
             if (args.isNotEmpty() && args[0] is JSONObject) {
