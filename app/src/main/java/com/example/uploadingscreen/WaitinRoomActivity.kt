@@ -51,7 +51,23 @@ class WaitinRoomActivity : AppCompatActivity() {
             socket.emit("game:start", payload)
         }
 
+
+        val existingPlayers = intent.getStringArrayExtra("players")
+        existingPlayers?.let {
+
+            players.clear()
+            players.addAll(it)
+
+            if (isHost && players.isNotEmpty()) {
+                players[0] = players[0] + " (Host)"
+            }
+
+            adapter.notifyDataSetChanged()
+        }
+
         setupSocket()
+
+        joinRoomSocket()
     }
 
     private fun setupSocket() {
@@ -92,14 +108,16 @@ class WaitinRoomActivity : AppCompatActivity() {
             }
         }
 
+        // Game started event
         socket.on("game:started") {
 
             runOnUiThread {
 
-                // Optional loading screen
+
             }
         }
 
+        // role socke
         socket.on("game:role") { args ->
 
             if (args.isNotEmpty() && args[0] is JSONObject) {
@@ -119,6 +137,17 @@ class WaitinRoomActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun joinRoomSocket() {
+
+        val socket = SocketManager.getSocket() ?: return
+
+        val payload = JSONObject().apply {
+            put("roomCode", roomCode)
+        }
+
+        socket.emit("lobby:join-room", payload)
     }
 
     override fun onDestroy() {

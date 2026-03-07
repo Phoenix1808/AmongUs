@@ -3,10 +3,11 @@ package com.example.uploadingscreen.network
 import android.util.Log
 import io.socket.client.IO
 import io.socket.client.Socket
+import com.example.uploadingscreen.utils.Constant.BASE_URL
 
 object SocketManager {
 
-    private const val BASE_URL = "https://creworcrook.onrender.com/"
+//    private const val SOCKET_URL = "https://creworcrook.onrender.com/"
 
     private var socket: Socket? = null
 

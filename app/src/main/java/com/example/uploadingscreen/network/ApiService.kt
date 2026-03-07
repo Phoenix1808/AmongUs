@@ -12,7 +12,6 @@ import com.example.uploadingscreen.model.SetupResponse
 //import com.example.uploadingscreen.model.SetupResponse
 import com.example.uploadingscreen.model.SignUpRequest
 import com.example.uploadingscreen.model.SignUpResponse
-import kotlinx.serialization.descriptors.PrimitiveKind
 
 import retrofit2.Response
 import retrofit2.http.POST

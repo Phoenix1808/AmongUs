@@ -5,7 +5,6 @@ import com.example.uploadingscreen.model.CreateRoomResponse
 import com.example.uploadingscreen.model.RoomLookupResponse
 import com.example.uploadingscreen.utils.Resource
 import com.example.uploadingscreen.network.RetrofitClient
-import retrofit2.Retrofit
 
 class RoomRepository {
     suspend fun createRoom(token:String): Resource<CreateRoomResponse>{

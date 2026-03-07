@@ -37,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
 //        }
 
 
-        //toggle option in the login screen 
-    
+        //toggle option in the login screen
+
         var isVisible = false
         toggle.setOnClickListener {
             if(isVisible){

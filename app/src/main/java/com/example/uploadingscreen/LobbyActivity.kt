@@ -12,8 +12,6 @@ import com.example.uploadingscreen.model.Player
 import com.example.uploadingscreen.network.SocketManager
 import com.example.uploadingscreen.utils.Resource
 import com.example.uploadingscreen.viewmodel.RoomViewModel
-import io.socket.client.Ack
-import org.json.JSONObject
 
 class LobbyActivity : AppCompatActivity() {
 
@@ -44,8 +42,6 @@ class LobbyActivity : AppCompatActivity() {
         val btnLookupRoom = findViewById<Button>(R.id.btnLookupRoom)
         val etRoomCode = findViewById<EditText>(R.id.etRoomCode)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        val tvCreateResult = findViewById<TextView>(R.id.tvCreateResult)
-        val tvLookupResult = findViewById<TextView>(R.id.tvLookupResult)
 
         val adapter = RoomAdapter(emptyList()) { room ->
             viewModel.lookupRoom(authToken!!, room.code)
@@ -86,10 +82,9 @@ class LobbyActivity : AppCompatActivity() {
                     progressBar.visibility = ProgressBar.GONE
 
                     val roomCode = resource.data?.code
-                    tvCreateResult.text = "Created Room Code: $roomCode"
 
                     roomCode?.let {
-                        waitAndJoinRoom(it, true)
+                        openWaitingRoom(it, true, null)
                     }
                 }
 
@@ -114,10 +109,8 @@ class LobbyActivity : AppCompatActivity() {
                     val roomCode = resource.data?.code
                     val players = resource.data?.players
 
-                    tvLookupResult.text = "Lookup Success: $roomCode"
-
                     roomCode?.let {
-                        waitAndJoinRoom(it, false, players)
+                        openWaitingRoom(it, false, players)
                     }
                 }
 
@@ -129,57 +122,23 @@ class LobbyActivity : AppCompatActivity() {
         }
     }
 
-    private fun waitAndJoinRoom(
+    private fun openWaitingRoom(
         roomCode: String,
         isHost: Boolean,
-        players: List<Player>? = null
+        players: List<Player>?
     ) {
 
-        val socket = SocketManager.getSocket() ?: return
+        val intent = Intent(this, WaitinRoomActivity::class.java)
 
-        if (socket.connected()) {
+        intent.putExtra("roomCode", roomCode)
+        intent.putExtra("isHost", isHost)
 
-            joinRoom(roomCode, isHost, players)
-
-        } else {
-
-            socket.once(io.socket.client.Socket.EVENT_CONNECT) {
-
-                runOnUiThread {
-                    joinRoom(roomCode, isHost, players)
-                }
-            }
-        }
-    }
-
-    private fun joinRoom(
-        roomCode: String,
-        isHost: Boolean,
-        players: List<Player>? = null
-    ) {
-
-        val socket = SocketManager.getSocket() ?: return
-
-        val payload = JSONObject().apply {
-            put("roomCode", roomCode)
+        players?.let {
+            val usernames = it.map { player -> player.username }.toTypedArray()
+            intent.putExtra("players", usernames)
         }
 
-        socket.emit("lobby:join-room", payload, Ack {
-
-            val intent = Intent(this, WaitinRoomActivity::class.java)
-
-            intent.putExtra("roomCode", roomCode)
-            intent.putExtra("isHost", isHost)
-
-            if (players != null) {
-
-                val usernames = players.map { it.username }.toTypedArray()
-                intent.putExtra("players", usernames)
-
-            }
-
-            startActivity(intent)
-        })
+        startActivity(intent)
     }
 
     private fun toast(msg: String?) {

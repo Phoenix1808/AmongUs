@@ -9,7 +9,6 @@ import com.example.uploadingscreen.model.LoginResponse
 import com.example.uploadingscreen.model.SetupRequest
 import com.example.uploadingscreen.model.SetupResponse
 import com.example.uploadingscreen.model.SignUpResponse
-import retrofit2.Retrofit
 
 
 class AuthRepository {

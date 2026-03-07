@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.uploadingscreen.model.SignUpRequest
 import com.example.uploadingscreen.utils.Resource
 import com.example.uploadingscreen.viewmodel.AuthViewModel
-import kotlin.math.sign
 
 class RegisterActivity : AppCompatActivity() {
 

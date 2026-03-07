@@ -1,16 +1,15 @@
 package com.example.uploadingscreen.network
 
+import com.example.uploadingscreen.utils.Constant.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import okio.Okio
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    private const val BASE_URL = "https://creworcrook.onrender.com/"
+//    private const val BASE_URL = "https://creworcrook.onrender.com/"
 
     private val login = HttpLoggingInterceptor().apply{
         level = HttpLoggingInterceptor.Level.BODY
