@@ -2,6 +2,7 @@ package com.example.uploadingscreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uploadingscreen.adapter.PlayerAdapter
@@ -15,6 +16,7 @@ class WaitinRoomActivity : AppCompatActivity() {
 
     private lateinit var adapter: PlayerAdapter
     private val players = mutableListOf<String>()
+    private val playerMap = HashMap<String,String>()
 
     private var roomCode: String? = null
     private var isHost: Boolean = false
@@ -74,6 +76,7 @@ class WaitinRoomActivity : AppCompatActivity() {
         socket.off("lobby:players-list")
         socket.off("game:started")
         socket.off("game:role")
+        socket?.off("lobby:player-joined")
 
         socket.on("lobby:players-list") { args ->
 
@@ -93,6 +96,7 @@ class WaitinRoomActivity : AppCompatActivity() {
                         val username = player.getString("username")
                         val userId = player.getString("userId")
 
+                        playerMap[userId] = username
                         if (userId == hostId) {
                             players.add("$username (Host)")
                         } else {
@@ -101,6 +105,25 @@ class WaitinRoomActivity : AppCompatActivity() {
                     }
 
                     adapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+        socket.on("lobby:player-joined") { args ->
+
+            if (args.isNotEmpty() && args[0] is JSONObject) {
+
+                val data = args[0] as JSONObject
+                val username = data.getString("username")
+
+                runOnUiThread {
+
+                    Toast.makeText(
+                        this,
+                        "$username joined the room",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                 }
             }
         }
@@ -126,6 +149,11 @@ class WaitinRoomActivity : AppCompatActivity() {
                     intent.putExtra("roomCode", roomCode)
                     intent.putExtra("role", role)
 
+                    val userIds = playerMap.keys.toTypedArray()
+                    val usernames = playerMap.values.toTypedArray()
+                    intent.putExtra("userIds",userIds)
+                    intent.putExtra("usernames",usernames)
+
                     startActivity(intent)
                     finish()
                 }
@@ -150,6 +178,7 @@ class WaitinRoomActivity : AppCompatActivity() {
         val socket = SocketManager.getSocket()
 
         socket?.off("lobby:players-list")
+        socket?.off("lobby:player-joined")
         socket?.off("game:started")
         socket?.off("game:role")
     }
