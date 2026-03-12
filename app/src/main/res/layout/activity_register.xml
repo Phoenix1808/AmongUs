@@ -163,6 +163,8 @@
         android:id="@+id/signLoader"
         android:background="#80000000"
         android:visibility="gone"
+        android:focusable="true"
+        android:clickable="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
