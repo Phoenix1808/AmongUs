@@ -145,6 +145,8 @@
         android:id="@+id/loaderLogin"
         android:background="#80000000"
         android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

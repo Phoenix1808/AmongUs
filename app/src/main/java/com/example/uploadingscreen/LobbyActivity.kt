@@ -18,6 +18,7 @@ class LobbyActivity : AppCompatActivity() {
     private lateinit var viewModel: RoomViewModel
     private var authToken: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,7 +44,7 @@ class LobbyActivity : AppCompatActivity() {
 
         binding.btnLookupRoom.setOnClickListener {
 
-            val code = binding.etRoomCode.text.toString().trim()
+            val code = binding.etRoomCode.text.toString().trim().uppercase()
 
             if (code.isEmpty()) {
                 binding.etRoomCode.error = "Enter room code"

@@ -3,11 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.uploadingscreen">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -18,52 +16,55 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UploadingScreen">
+        <activity
+            android:name=".MeetingActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="API_KEY"/>
+            android:value="API_KEY" />
 
         <activity
-            android:name="com.example.uploadingscreen.WaitinRoomActivity"
+            android:name=".WaitinRoomActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.GameActivity"
+            android:name=".GameActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.LobbyActivity"
+            android:name=".LobbyActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.AvatarActivity"
+            android:name=".AvatarActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.FormActivity"
+            android:name=".FormActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.TriviaResultActivity"
+            android:name=".TriviaResultActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.TriviaQuizActivity"
+            android:name=".TriviaQuizActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.NumSeqActivity"
+            android:name=".NumSeqActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.UploadingActivity"
+            android:name=".UploadingActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.ConnectDotActivity"
+            android:name=".ConnectDotActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.uploadingscreen.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.UploadingScreen">
             <intent-filter>
@@ -73,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.uploadingscreen.MemoryGameActivity"
+            android:name=".MemoryGameActivity"
             android:exported="false" />
     </application>
 
