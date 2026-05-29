@@ -4,60 +4,256 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/welcome_bg_hero"
     android:padding="24dp">
 
 
-    <Button
+    <ImageView
+        android:id="@+id/imgHero"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/center_illus"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.36"
+        android:layout_marginTop="8dp" />
+
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREW OR\nCROOK"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:fontFamily="@font/bangers_regular"
+        android:letterSpacing="0.06"
+        android:gravity="center"
+        android:lineSpacingMultiplier="0.9"
+        android:layout_marginTop="-45dp"
+        app:layout_constraintTop_toBottomOf="@id/imgHero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/dividerLine"
+        android:layout_width="64dp"
+        android:layout_height="3dp"
+        android:background="@drawable/purple_line_gradient"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your destiny"
+        android:textColor="#F7E74A"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_lightitalic"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/dividerLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnCreateRoom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Create Room"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/card_translucent_dark"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:elevation="8dp"
+        android:stateListAnimator="@null"
+        android:outlineSpotShadowColor="#FF0077"
+        android:outlineAmbientShadowColor="#9E00D9"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/txtSubtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imgPlus"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/plus_circle_bg"
+            android:src="@drawable/ic_plus"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/txtCreateRoomTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Create Room"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/imgPlus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtCreateRoomSubtitle"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/txtCreateRoomSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Start a new game"
+            android:textColor="#B3FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toEndOf="@id/imgPlus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCreateRoomTitle"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDivider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnCreateRoom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#33FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtOr"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/txtOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textColor="#80FFFFFF"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#33FFFFFF"
+            app:layout_constraintStart_toEndOf="@id/txtOr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
-        android:id="@+id/tvCreateResult"
+        android:id="@+id/lblRoomCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create result will appear here"
+        android:text="Enter Room Code"
+        android:textColor="#CCFFFFFF"
+        android:textSize="13sp"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnCreateRoom"
-        app:layout_constraintStart_toStartOf="parent"/>
-
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutDivider"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etRoomCode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Room Code"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/tvCreateResult"
+        android:hint="XXX"
+        android:textColorHint="#4DFFFFFF"
+        android:textColor="@android:color/white"
+        android:background="@drawable/card_translucent_dark"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:inputType="textCapCharacters"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:letterSpacing="0.1"
+        android:singleLine="true"
+        android:elevation="8dp"
+        android:stateListAnimator="@null"
+        android:outlineSpotShadowColor="#FF0077"
+        android:outlineAmbientShadowColor="#9E00D9"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/lblRoomCode"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:inputType="textCapCharacters" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLookupRoom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Join Room"
-        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@drawable/btn_gradient"
+        app:backgroundTint="@null"
+        android:drawableStart="@drawable/ic_users"
+        android:drawablePadding="12dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="14dp"
+        android:elevation="10dp"
+        android:stateListAnimator="@null"
+        android:outlineSpotShadowColor="#FF0077"
+        android:outlineAmbientShadowColor="#9E00D9"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/etRoomCode"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtBottomSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gather your friends and find the crook"
+        android:textColor="#80FFFFFF"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnLookupRoom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvCreateResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvLookupResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lookup result here"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnLookupRoom"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ProgressBar
@@ -65,11 +261,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/tvLookupResult"
+        android:indeterminateTint="#FF0077"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
