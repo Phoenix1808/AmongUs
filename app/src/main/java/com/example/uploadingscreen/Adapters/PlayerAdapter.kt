@@ -13,6 +13,8 @@ class PlayerAdapter(
 
     class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvName: TextView = view.findViewById(R.id.tvPlayerName)
+        val tvAvatar: TextView = view.findViewById(R.id.tvPlayerAvatar)
+        val tvHost: TextView = view.findViewById(R.id.tvHostLabel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
@@ -24,6 +26,15 @@ class PlayerAdapter(
     override fun getItemCount(): Int = players.size
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
-        holder.tvName.text = players[position]
+        val rawText = players[position]
+        val isHost = rawText.endsWith(" (Host)")
+        val displayName = if (isHost) {
+            rawText.substring(0, rawText.length - 7).trim()
+        } else {
+            rawText
+        }
+        holder.tvName.text = displayName
+        holder.tvHost.visibility = if (isHost) View.VISIBLE else View.GONE
+        holder.tvAvatar.text = "P${position + 1}"
     }
 }

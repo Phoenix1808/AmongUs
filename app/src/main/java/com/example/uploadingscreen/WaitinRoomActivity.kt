@@ -31,7 +31,7 @@ class WaitinRoomActivity : AppCompatActivity() {
         roomCode = intent.getStringExtra("roomCode")
         isHost = intent.getBooleanExtra("isHost", false)
 
-        binding.tvRoomCode.text = "Room Code: $roomCode"
+        binding.tvRoomCode.text = roomCode
 
         adapter = PlayerAdapter(players)
 
@@ -55,6 +55,27 @@ class WaitinRoomActivity : AppCompatActivity() {
             })
         }
 
+        binding.btnCopyCode.setOnClickListener {
+            roomCode?.let { code ->
+                val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                val clip = android.content.ClipData.newPlainText("Room Code", code)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(this, "Room code copied!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.btnHelp.setOnClickListener {
+            binding.layoutRulesPopup.visibility = android.view.View.VISIBLE
+        }
+
+        binding.btnDismissRules.setOnClickListener {
+            binding.layoutRulesPopup.visibility = android.view.View.GONE
+        }
+
+        binding.btnGotIt.setOnClickListener {
+            binding.layoutRulesPopup.visibility = android.view.View.GONE
+        }
+
         val existingPlayers = intent.getStringArrayExtra("players")
         existingPlayers?.let {
 
@@ -66,8 +87,10 @@ class WaitinRoomActivity : AppCompatActivity() {
             }
 
             adapter.notifyDataSetChanged()
+            updatePlayerCount()
         }
 
+        updatePlayerCount()
         joinRoomSocket()
         setupSocket()
     }
@@ -109,6 +132,7 @@ class WaitinRoomActivity : AppCompatActivity() {
                     }
 
                     adapter.notifyDataSetChanged()
+                    updatePlayerCount()
                 }
             }
         }
@@ -188,5 +212,9 @@ class WaitinRoomActivity : AppCompatActivity() {
         socket?.off("lobby:player-joined")
         socket?.off("game:started")
         socket?.off("game:role")
+    }
+
+    private fun updatePlayerCount() {
+        binding.tvPlayerCount.text = "(${players.size}/6)"
     }
 }
